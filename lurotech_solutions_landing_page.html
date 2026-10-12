@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuroTech Solutions | De la Idea al Software Realidad</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        luro: {
+                            bg: '#111315',
+                            dark: '#16191C',
+                            card: '#1F2428',
+                            cardHover: '#282E34',
+                            border: '#373E46',
+                            borderLight: '#525B64',
+                            silver: '#D1D5DB',
+                            silverBright: '#F3F4F6',
+                            muted: '#9CA3AF',
+                            accent: '#E5E7EB'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #111315;
+            color: #E5E7EB;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .circuit-bg {
+            background-image: radial-gradient(rgba(209, 213, 219, 0.07) 1px, transparent 0);
+            background-size: 28px 28px;
+        }
+
+        .metallic-glow {
+            box-shadow: 0 0 35px -5px rgba(209, 213, 219, 0.18);
+        }
+
+        .shield-gradient {
+            background: linear-gradient(145deg, #252B30 0%, #14171A 100%);
+        }
+
+        .border-glow {
+            border: 1px solid #373E46;
+            transition: all 0.3s ease;
+        }
+
+        .border-glow:hover {
+            border-color: #D1D5DB;
+            box-shadow: 0 0 20px rgba(209, 213, 219, 0.15);
+        }
+
+        .silver-text-gradient {
+            background: linear-gradient(180deg, #FFFFFF 0%, #9CA3AF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 0.98; transform: scale(1.02); }
+        }
+
+        .pulse-glow {
+            animation: pulseGlow 4s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="circuit-bg relative selection:bg-slate-200 selection:text-slate-900">
+
+    <header class="fixed top-0 left-0 right-0 z-50 bg-[#111315]/90 backdrop-blur-md border-b border-luro-border/60 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo with uploaded image -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="relative h-12 w-auto flex items-center justify-center p-1 bg-luro-card border border-luro-border rounded-xl group-hover:border-luro-silver transition-colors">
+                        <img src="input_file_0.png" alt="LuroTech Solutions Logo" class="h-10 w-auto object-contain filter drop-shadow">
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-xl font-extrabold tracking-wider text-white flex items-center gap-1 font-mono">
+                            LURO<span class="text-luro-silver">TECH</span>
+                        </span>
+                        <span class="text-[9px] tracking-[0.3em] text-luro-muted -mt-1 font-bold uppercase">Solutions</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-luro-silver">
+                    <a href="#inicio" class="hover:text-white transition-colors">Inicio</a>
+                    <a href="#servicios" class="hover:text-white transition-colors">Servicios</a>
+                    <a href="#proceso" class="hover:text-white transition-colors">Proceso</a>
+                    <a href="#cotizador" class="hover:text-white transition-colors text-slate-200 font-semibold flex items-center gap-1.5">
+                        <i class="fa-solid fa-calculator text-xs text-luro-silver"></i> Cotizador
+                    </a>
+                    <a href="#contacto" class="hover:text-white transition-colors">Contacto</a>
+                </nav>
+
+                <!-- CTA Button -->
+                <div class="hidden md:flex items-center">
+                    <a href="#cotizador" class="px-5 py-2.5 rounded-lg bg-luro-silver hover:bg-white text-luro-dark font-extrabold text-sm transition-all duration-200 transform hover:scale-[1.02] shadow-lg shadow-white/5 flex items-center gap-2">
+                        <i class="fa-solid fa-lightbulb text-xs"></i>
+                        <span>Transforma tu Idea</span>
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="p-2 rounded-lg text-luro-silver hover:text-white hover:bg-luro-card focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden bg-luro-dark border-b border-luro-border px-4 pt-2 pb-6 space-y-3">
+            <a href="#inicio" class="block px-3 py-2 rounded-md text-base font-medium text-luro-silver hover:bg-luro-card hover:text-white">Inicio</a>
+            <a href="#servicios" class="block px-3 py-2 rounded-md text-base font-medium text-luro-silver hover:bg-luro-card hover:text-white">Servicios</a>
+            <a href="#proceso" class="block px-3 py-2 rounded-md text-base font-medium text-luro-silver hover:bg-luro-card hover:text-white">Proceso</a>
+            <a href="#cotizador" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-luro-card">Cotizador de Ideas</a>
+            <a href="#contacto" class="block px-3 py-2 rounded-md text-base font-medium text-luro-silver hover:bg-luro-card hover:text-white">Contacto</a>
+            <a href="#cotizador" class="block w-full text-center mt-4 px-5 py-3 rounded-lg bg-luro-silver text-luro-dark font-bold text-sm">
+                Transforma tu Idea
+            </a>
+        </div>
+    </header>
+
+    <main id="inicio" class="pt-24 lg:pt-32">
+        <section class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-20 lg:py-28 overflow-hidden">
+            <div class="absolute -top-40 right-0 w-96 h-96 bg-slate-500/10 rounded-full blur-3xl -z-10"></div>
+            <div class="absolute bottom-0 left-10 w-80 h-80 bg-slate-400/10 rounded-full blur-3xl -z-10"></div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Left Hero Column -->
+                <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-luro-card border border-luro-border text-luro-silver text-xs font-semibold uppercase tracking-wider shadow-inner">
+                        <span class="w-2 h-2 rounded-full bg-luro-silver animate-ping"></span>
+                        Desarrollo de Software Customizado & Apps
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.15]">
+                        Tú tienes la idea, <br class="hidden sm:block"/>
+                        <span class="silver-text-gradient">
+                            nosotros la hacemos realidad.
+                        </span>
+                    </h1>
+
+                    <p class="text-lg text-luro-muted max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Transformamos conceptos en plataformas web, aplicaciones móviles y software empresarial a medida. Construcción sólida, arquitectura limpia y máxima seguridad de grado empresarial.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#cotizador" class="px-8 py-4 rounded-xl bg-luro-silver hover:bg-white text-luro-dark font-extrabold text-base transition-all duration-200 transform hover:-translate-y-0.5 shadow-lg shadow-white/5 flex items-center justify-center gap-3">
+                            <i class="fa-solid fa-calculator"></i>
+                            Cotizar Proyecto Ahora
+                        </a>
+                        <a href="#servicios" class="px-8 py-4 rounded-xl bg-luro-card hover:bg-luro-cardHover text-luro-silver border border-luro-border font-semibold text-base transition-all flex items-center justify-center gap-2">
+                            Ver Servicios
+                            <i class="fa-solid fa-arrow-right text-xs text-luro-silver"></i>
+                        </a>
+                    </div>
+
+                    <!-- Trust Stats Mini Bar -->
+                    <div class="pt-8 border-t border-luro-border/60 grid grid-cols-3 gap-4 text-center lg:text-left">
+                        <div>
+                            <div class="text-2xl font-bold text-white font-mono">100%</div>
+                            <div class="text-xs text-luro-muted">Software a Medida</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-white font-mono">24/7</div>
+                            <div class="text-xs text-luro-muted">Seguridad & Soporte</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-luro-silver font-mono">Agile</div>
+                            <div class="text-xs text-luro-muted">Desarrollo Eficiente</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Hero Visual presenting your uploaded logo image -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative w-full max-w-md">
+                        <div class="relative rounded-2xl shield-gradient border border-luro-border p-8 shadow-2xl metallic-glow overflow-hidden flex flex-col items-center">
+                            
+                            <!-- Circuit Background Graphic overlay -->
+                            <div class="absolute inset-0 opacity-20 pointer-events-none">
+                                <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                                    <path d="M0,20 L30,20 L50,40 L100,40" stroke="#D1D5DB" stroke-width="0.5" fill="none" stroke-dasharray="2 2" />
+                                    <path d="M0,80 L40,80 L60,60 L100,60" stroke="#9CA3AF" stroke-width="0.5" fill="none" />
+                                    <circle cx="50" cy="40" r="1.5" fill="#D1D5DB" />
+                                    <circle cx="60" cy="60" r="1.5" fill="#D1D5DB" />
+                                </svg>
+                            </div>
+
+                            <!-- Embedded Uploaded Image Logo -->
+                            <div class="pulse-glow relative w-full flex justify-center items-center py-4 z-10">
+                                <img src="input_file_0.png" alt="LuroTech Solutions Shield Logo" class="w-64 h-auto max-h-80 object-contain drop-shadow-2xl">
+                            </div>
+
+                            <!-- Terminal Status Widget -->
+                            <div class="w-full bg-luro-dark/90 rounded-xl p-3.5 text-left border border-luro-border text-xs font-mono text-luro-silver space-y-1 mt-4 z-10">
+                                <div class="flex items-center gap-1.5 text-luro-muted mb-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-slate-600"></span>
+                                    <span class="w-2.5 h-2.5 rounded-full bg-slate-500"></span>
+                                    <span class="w-2.5 h-2.5 rounded-full bg-slate-400"></span>
+                                    <span class="ml-auto text-[10px]">lurotech.core.v1</span>
+                                </div>
+                                <p><span class="text-white">$</span> compile_idea --mode=custom</p>
+                                <p class="text-luro-silver">&gt; Building robust architecture...</p>
+                                <p class="text-slate-400">&gt; Status: <span class="text-white font-bold animate-pulse">Listo para despegar 🚀</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="servicios" class="py-20 bg-luro-dark/70 border-y border-luro-border/60 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                    <h2 class="text-xs font-bold uppercase tracking-widest text-luro-silver">Nuestras Capacidades</h2>
+                    <p class="text-3xl sm:text-4xl font-extrabold text-white">Soluciones Tecnológicas Integrales</p>
+                    <p class="text-luro-muted text-base">
+                        No importa en qué etapa se encuentre tu idea, nos encargamos del ciclo completo de diseño y desarrollo.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Service 1 -->
+                    <div class="p-6 rounded-2xl bg-luro-card border border-luro-border hover:border-luro-silver transition-all duration-300 group hover:-translate-y-1">
+                        <div class="w-12 h-12 rounded-xl bg-slate-800 border border-luro-border text-luro-silver flex items-center justify-center text-xl mb-6 group-hover:bg-luro-silver group-hover:text-luro-dark transition-colors">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Desarrollo Web & SaaS</h3>
+                        <p class="text-luro-muted text-sm leading-relaxed mb-4">
+                            Plataformas web de alto rendimiento, sistemas SaaS escalables, e-commerce y paneles de control intuitivos.
+                        </p>
+                        <ul class="text-xs text-luro-muted space-y-2">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-luro-silver"></i> React / Next.js / Vue</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-luro-silver"></i> Arquitectura Cloud</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-luro-silver"></i> Performance & SEO</li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div class="p-6 rounded-2xl bg-luro-card border border-luro-border hover:border-luro-silver transition-all duration-300 group hover:-translate-y-1">
+                        <div class="w-12 h-12 rounded-xl bg-slate-800 border border-luro-border text-luro-silver flex items-center justify-center text-xl mb-6 group-hover:bg-luro-silver group-hover:text-luro-dark transition-colors">
+                            <i class="fa-solid fa-mobile-screen-button"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Apps Móviles iOS & Android</h3>
+                        <p class="text-luro-muted text-sm leading-relaxed mb-4">
+                            Aplicaciones nativas e híbridas con experiencia fluida, diseño moderno y publicación en tiendas.
+                        </p>
+                        <ul class="text-xs text-luro-muted space-y-2">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-luro-silver"></i> Flutter & React Native</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-luro-silver"></i> Notificaciones Push & Mapas</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-luro-silver"></i> Publicación en Tiendas</li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 3 -->
+                    <div class="p-6 rounded-2xl bg-luro-card border border-luro-border hover:border-luro-silver transition-all duration-300 group hover:-translate-y-1">
+                        <div class="w-12 h-12 rounded-xl bg-slate-800 border border-luro-border text-luro-silver flex items-center justify-center text-xl mb-6 group-hover:bg-luro-silver group-hover:text-luro-dark transition-colors">
+                            <i class="fa-solid fa-network-wired"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Software a Medida & APIs</h3>
+                        <p class="text-luro-muted text-sm leading-relaxed mb-4">
+                            Sistemas de gestión interna (ERP, CRM), automatización de procesos e integración de APIs complejas.
+                        </p>
+                        <ul class="text-xs text-luro-muted space-y-2">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-luro-silver"></i> Automatización de Procesos</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-luro-silver"></i> Microservicios & APIs REST</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-luro-silver"></i> Pasarelas de Pago</li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 4 -->
+                    <div class="p-6 rounded-2xl bg-luro-card border border-luro-border hover:border-luro-silver transition-all duration-300 group hover:-translate-y-1">
+                        <div class="w-12 h-12 rounded-xl bg-slate-800 border border-luro-border text-luro-silver flex items-center justify-center text-xl mb-6 group-hover:bg-luro-silver group-hover:text-luro-dark transition-colors">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Seguridad & Consultoría</h3>
+                        <p class="text-luro-muted text-sm leading-relaxed mb-4">
+                            Protección de datos, auditorías de seguridad, optimización en la nube y prototipado UX/UI.
+                        </p>
+                        <ul class="text-xs text-luro-muted space-y-2">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-luro-silver"></i> Encriptación & Ciberseguridad</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-luro-silver"></i> Infraestructura Nube (AWS/GCP)</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-luro-silver"></i> Diseños Figma UX/UI</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cotizador" class="py-20 relative">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center space-y-3 mb-12">
+                    <span class="text-xs font-bold uppercase tracking-widest text-luro-silver">Herramienta Interactiva</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Cotizador de Ideas en Tiempo Real</h2>
+                    <p class="text-luro-muted max-w-2xl mx-auto text-sm">
+                        Selecciona las características de tu proyecto para obtener una estimación de presupuesto y tiempo.
+                    </p>
+                </div>
+
+                <div class="bg-luro-dark border border-luro-border rounded-2xl p-6 sm:p-10 shadow-2xl">
+                    <!-- Step 1: Solution Selection -->
+                    <div class="mb-8">
+                        <label class="block text-sm font-semibold text-luro-silver mb-4">1. ¿Qué tipo de solución necesitas?</label>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                            <button type="button" onclick="selectType(this, 'web', 600, 3)" class="type-btn active p-4 rounded-xl border border-luro-silver bg-slate-800 text-white flex flex-col items-center gap-2 transition-all">
+                                <i class="fa-solid fa-globe text-2xl text-luro-silver"></i>
+                                <span class="text-xs font-semibold">Página Web / SaaS</span>
+                            </button>
+                            <button type="button" onclick="selectType(this, 'mobile', 900, 4)" class="type-btn p-4 rounded-xl border border-luro-border bg-luro-card text-luro-muted flex flex-col items-center gap-2 hover:border-luro-borderLight transition-all">
+                                <i class="fa-solid fa-mobile-screen text-2xl text-luro-muted"></i>
+                                <span class="text-xs font-semibold">App Móvil (iOS/Android)</span>
+                            </button>
+                            <button type="button" onclick="selectType(this, 'custom', 1200, 5)" class="type-btn p-4 rounded-xl border border-luro-border bg-luro-card text-luro-muted flex flex-col items-center gap-2 hover:border-luro-borderLight transition-all">
+                                <i class="fa-solid fa-server text-2xl text-luro-muted"></i>
+                                <span class="text-xs font-semibold">Software Empresarial</span>
+                            </button>
+                            <button type="button" onclick="selectType(this, 'consulting', 400, 2)" class="type-btn p-4 rounded-xl border border-luro-border bg-luro-card text-luro-muted flex flex-col items-center gap-2 hover:border-luro-borderLight transition-all">
+                                <i class="fa-solid fa-sliders text-2xl text-luro-muted"></i>
+                                <span class="text-xs font-semibold">MVP / Prototipo Rápido</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Features Checkboxes -->
+                    <div class="mb-8">
+                        <label class="block text-sm font-semibold text-luro-silver mb-4">2. Selecciona las características clave:</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                            <label class="flex items-center p-3 rounded-lg bg-luro-card border border-luro-border hover:border-luro-borderLight cursor-pointer text-xs font-medium text-luro-silver">
+                                <input type="checkbox" onchange="updateEstimation()" value="200" data-weeks="1" data-name="Autenticación de Usuarios" class="feature-checkbox rounded border-luro-border bg-luro-dark text-slate-200 focus:ring-slate-400 mr-2.5">
+                                Autenticación / Usuarios
+                            </label>
+                            <label class="flex items-center p-3 rounded-lg bg-luro-card border border-luro-border hover:border-luro-borderLight cursor-pointer text-xs font-medium text-luro-silver">
+                                <input type="checkbox" onchange="updateEstimation()" value="300" data-weeks="1.5" data-name="Pasarela de Pagos" class="feature-checkbox rounded border-luro-border bg-luro-dark text-slate-200 focus:ring-slate-400 mr-2.5">
+                                Pagos en Línea (Stripe/PayPal)
+                            </label>
+                            <label class="flex items-center p-3 rounded-lg bg-luro-card border border-luro-border hover:border-luro-borderLight cursor-pointer text-xs font-medium text-luro-silver">
+                                <input type="checkbox" onchange="updateEstimation()" value="350" data-weeks="2" data-name="Panel de Administración" class="feature-checkbox rounded border-luro-border bg-luro-dark text-slate-200 focus:ring-slate-400 mr-2.5">
+                                Panel Admin Dashboard
+                            </label>
+                            <label class="flex items-center p-3 rounded-lg bg-luro-card border border-luro-border hover:border-luro-borderLight cursor-pointer text-xs font-medium text-luro-silver">
+                                <input type="checkbox" onchange="updateEstimation()" value="400" data-weeks="2" data-name="Integración IA" class="feature-checkbox rounded border-luro-border bg-luro-dark text-slate-200 focus:ring-slate-400 mr-2.5">
+                                Integración con IA / ChatGPT
+                            </label>
+                            <label class="flex items-center p-3 rounded-lg bg-luro-card border border-luro-border hover:border-luro-borderLight cursor-pointer text-xs font-medium text-luro-silver">
+                                <input type="checkbox" onchange="updateEstimation()" value="250" data-weeks="1" data-name="Diseño UI Custom" class="feature-checkbox rounded border-luro-border bg-luro-dark text-slate-200 focus:ring-slate-400 mr-2.5">
+                                Diseño UX/UI Premium
+                            </label>
+                            <label class="flex items-center p-3 rounded-lg bg-luro-card border border-luro-border hover:border-luro-borderLight cursor-pointer text-xs font-medium text-luro-silver">
+                                <input type="checkbox" onchange="updateEstimation()" value="200" data-weeks="1" data-name="APIs Externas" class="feature-checkbox rounded border-luro-border bg-luro-dark text-slate-200 focus:ring-slate-400 mr-2.5">
+                                Conexión con APIs Externas
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Estimator Output Card -->
+                    <div class="bg-luro-bg border border-luro-border rounded-xl p-6 flex flex-col md:flex-row items-center justify-between gap-6">
+                        <div class="space-y-1 text-center md:text-left">
+                            <span class="text-xs text-luro-muted uppercase tracking-wider font-semibold">Resumen Estimado</span>
+                            <div class="flex items-baseline gap-2">
+                                <span id="est-price" class="text-3xl font-extrabold text-white font-mono">$600 USD</span>
+                                <span class="text-xs text-luro-muted">*aprox. base</span>
+                            </div>
+                            <p class="text-xs text-luro-silver">
+                                Tiempo estimado de entrega: <span id="est-time" class="text-white font-semibold">3 - 4 semanas</span>
+                            </p>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+                            <button onclick="sendEstimationToContact()" class="px-6 py-3 rounded-lg bg-luro-silver hover:bg-white text-luro-dark font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-paper-plane"></i>
+                                Enviar esta Idea
+                            </button>
+                            <a id="whatsapp-btn" href="#" target="_blank" class="px-6 py-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-white border border-luro-border font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2">
+                                <i class="fa-brands fa-whatsapp text-lg text-emerald-400"></i>
+                                WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="proceso" class="py-20 bg-luro-dark/50 border-t border-luro-border/60">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+                    <span class="text-xs font-bold uppercase tracking-widest text-luro-silver">Metodología Transparente</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">De la Idea a la Realidad</h2>
+                    <p class="text-luro-muted text-sm">Acompañamiento continuo y entregables paso a paso.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <!-- Step 1 -->
+                    <div class="bg-luro-card p-6 rounded-2xl border border-luro-border space-y-4">
+                        <div class="w-10 h-10 rounded-lg bg-slate-800 text-luro-silver border border-luro-border font-mono font-bold flex items-center justify-center text-lg">01</div>
+                        <h3 class="text-lg font-bold text-white">Descubrimiento</h3>
+                        <p class="text-xs text-luro-muted leading-relaxed">Analizamos tu visión, planteamos la arquitectura óptima y definimos el mapa de ruta.</p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="bg-luro-card p-6 rounded-2xl border border-luro-border space-y-4">
+                        <div class="w-10 h-10 rounded-lg bg-slate-800 text-luro-silver border border-luro-border font-mono font-bold flex items-center justify-center text-lg">02</div>
+                        <h3 class="text-lg font-bold text-white">Diseño & UI/UX</h3>
+                        <p class="text-xs text-luro-muted leading-relaxed">Diseñamos prototipos interactivos para validar la experiencia antes de escribir código.</p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="bg-luro-card p-6 rounded-2xl border border-luro-border space-y-4">
+                        <div class="w-10 h-10 rounded-lg bg-slate-800 text-luro-silver border border-luro-border font-mono font-bold flex items-center justify-center text-lg">03</div>
+                        <h3 class="text-lg font-bold text-white">Desarrollo Ágil</h3>
+                        <p class="text-xs text-luro-muted leading-relaxed">Programación robusta con avances periódicos y pruebas continuas de calidad.</p>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="bg-luro-card p-6 rounded-2xl border border-luro-border space-y-4">
+                        <div class="w-10 h-10 rounded-lg bg-slate-800 text-luro-silver border border-luro-border font-mono font-bold flex items-center justify-center text-lg">04</div>
+                        <h3 class="text-lg font-bold text-white">Despliegue & Soporte</h3>
+                        <p class="text-xs text-luro-muted leading-relaxed">Lanzamiento oficial en la nube y soporte constante para asegurar el crecimiento.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto" class="py-20 bg-luro-dark/80 border-t border-luro-border/60">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center space-y-3 mb-12">
+                    <span class="text-xs font-bold uppercase tracking-widest text-luro-silver">¿Listo para comenzar?</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Cuéntanos tu Idea</h2>
+                    <p class="text-luro-muted text-sm">Respuesta garantizada en menos de 24 horas.</p>
+                </div>
+
+                <form id="contact-form" onsubmit="handleFormSubmit(event)" class="bg-luro-card border border-luro-border rounded-2xl p-6 sm:p-10 space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-medium text-luro-silver mb-2">Nombre Completo *</label>
+                            <input type="text" required placeholder="Ej. Carlos Mendoza" class="w-full bg-luro-dark border border-luro-border rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-luro-silver">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-luro-silver mb-2">Correo Electrónico *</label>
+                            <input type="email" required placeholder="carlos@empresa.com" class="w-full bg-luro-dark border border-luro-border rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-luro-silver">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-medium text-luro-silver mb-2">Teléfono / WhatsApp</label>
+                            <input type="tel" placeholder="+123 456 789" class="w-full bg-luro-dark border border-luro-border rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-luro-silver">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-luro-silver mb-2">Tipo de Proyecto</label>
+                            <select class="w-full bg-luro-dark border border-luro-border rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-luro-silver">
+                                <option>Desarrollo Web / SaaS</option>
+                                <option>App Móvil (iOS / Android)</option>
+                                <option>Software Empresarial Custom</option>
+                                <option>Consultoría & Ciberseguridad</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-luro-silver mb-2">Detalles de tu Idea *</label>
+                        <textarea id="idea-textarea" required rows="4" placeholder="Describe brevemente qué deseas construir o qué solución necesitas..." class="w-full bg-luro-dark border border-luro-border rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-luro-silver"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 rounded-xl bg-luro-silver hover:bg-white text-luro-dark font-extrabold text-sm uppercase tracking-wider transition-all duration-200 shadow-lg shadow-white/5 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        Enviar Idea a LuroTech
+                    </button>
+                </form>
+
+                <div id="toast" class="hidden fixed bottom-6 right-6 bg-luro-dark border border-luro-silver text-white p-4 rounded-xl shadow-2xl flex items-center gap-3 z-50">
+                    <i class="fa-solid fa-circle-check text-luro-silver text-xl"></i>
+                    <div>
+                        <div class="font-bold text-sm">¡Mensaje Recibido!</div>
+                        <div class="text-xs text-luro-muted">Nos pondremos en contacto contigo pronto.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-luro-bg border-t border-luro-border py-12 text-luro-muted text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-3">
+                <div class="h-10 w-auto rounded-lg bg-luro-card border border-luro-border p-1 flex items-center justify-center">
+                    <img src="input_file_0.png" alt="LuroTech Logo" class="h-8 w-auto object-contain">
+                </div>
+                <div>
+                    <span class="font-extrabold text-white text-sm font-mono tracking-wider">LUROTECH SOLUTIONS</span>
+                    <p class="text-[11px] text-luro-muted">Tú tienes la idea, nosotros la hacemos realidad.</p>
+                </div>
+            </div>
+
+            <div class="flex gap-6 text-luro-silver">
+                <a href="#inicio" class="hover:text-white transition-colors">Inicio</a>
+                <a href="#servicios" class="hover:text-white transition-colors">Servicios</a>
+                <a href="#proceso" class="hover:text-white transition-colors">Proceso</a>
+                <a href="#cotizador" class="hover:text-white transition-colors">Cotizador</a>
+                <a href="#contacto" class="hover:text-white transition-colors">Contacto</a>
+            </div>
+
+            <div class="flex items-center gap-4 text-base text-luro-silver">
+                <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-github"></i></a>
+                <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mt-8 pt-8 border-t border-luro-border/40 text-luro-muted">
+            © <span id="year">2026</span> LuroTech Solutions. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        let baseCost = 600;
+        let baseWeeks = 3;
+        let selectedTypeName = 'Página Web / SaaS';
+
+        function selectType(btn, type, cost, weeks) {
+            document.querySelectorAll('.type-btn').forEach(b => {
+                b.classList.remove('active', 'border-luro-silver', 'bg-slate-800', 'text-white');
+                b.classList.add('border-luro-border', 'bg-luro-card', 'text-luro-muted');
+                const icon = b.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('text-luro-silver');
+                    icon.classList.add('text-luro-muted');
+                }
+            });
+
+            btn.classList.add('active', 'border-luro-silver', 'bg-slate-800', 'text-white');
+            btn.classList.remove('border-luro-border', 'bg-luro-card', 'text-luro-muted');
+            const activeIcon = btn.querySelector('i');
+            if (activeIcon) {
+                activeIcon.classList.remove('text-luro-muted');
+                activeIcon.classList.add('text-luro-silver');
+            }
+
+            baseCost = cost;
+            baseWeeks = weeks;
+            selectedTypeName = btn.querySelector('span').textContent;
+            updateEstimation();
+        }
+
+        function updateEstimation() {
+            let extraCost = 0;
+            let extraWeeks = 0;
+            let selectedFeatures = [];
+
+            document.querySelectorAll('.feature-checkbox:checked').forEach(cb => {
+                extraCost += parseInt(cb.value);
+                extraWeeks += parseFloat(cb.getAttribute('data-weeks'));
+                selectedFeatures.push(cb.getAttribute('data-name'));
+            });
+
+            const totalCost = baseCost + extraCost;
+            const totalWeeks = Math.ceil(baseWeeks + extraWeeks);
+
+            document.getElementById('est-price').textContent = `$${totalCost} USD`;
+            document.getElementById('est-time').textContent = `${totalWeeks} - ${totalWeeks + 1} semanas`;
+
+            const message = encodeURIComponent(
+                `Hola LuroTech Solutions, estuve en su sitio web y coticé el siguiente proyecto:\n` +
+                `- Tipo: ${selectedTypeName}\n` +
+                `- Módulos: ${selectedFeatures.length > 0 ? selectedFeatures.join(', ') : 'Base'}\n` +
+                `- Estimado: ~$${totalCost} USD (${totalWeeks} semanas)\n` +
+                `Me gustaría discutir los detalles.`
+            );
+            document.getElementById('whatsapp-btn').href = `https://wa.me/?text=${message}`;
+        }
+
+        function sendEstimationToContact() {
+            let selectedFeatures = [];
+            document.querySelectorAll('.feature-checkbox:checked').forEach(cb => {
+                selectedFeatures.push(cb.getAttribute('data-name'));
+            });
+
+            const summaryText = `[Cotización Web]\n- Tipo de Proyecto: ${selectedTypeName}\n- Módulos: ${selectedFeatures.length > 0 ? selectedFeatures.join(', ') : 'Estándar'}\n- Presupuesto Estimated: ${document.getElementById('est-price').textContent}`;
+
+            const textarea = document.getElementById('idea-textarea');
+            textarea.value = summaryText;
+
+            document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const toast = document.getElementById('toast');
+            toast.classList.remove('hidden');
+
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 4000);
+
+            e.target.reset();
+        }
+
+        updateEstimation();
+    </script>
+</body>
+</html>
